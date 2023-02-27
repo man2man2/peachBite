@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <typeAliases>
+		<typeAlias alias="egovMap" type="org.egovframe.rte.psl.dataaccess.util.EgovMap"/>
+		<typeAlias alias="searchVO" type="peachBite.com.DefaultVO"/>
+		<typeAlias alias="cafemainVO" type="peachBite.cafemain.service.CafemainVO"/>
+		<typeAlias alias="cafeuserVO" type="peachBite.cafeuser.service.CafeuserVO"/>
+		<typeAlias alias="pbgVO" type="peachBite.pbg.service.PbgVO"/>
+		<typeAlias alias="pbwVO" type="peachBite.pbw.service.PbwVO"/>
+		<typeAlias alias="pbgactVO" type="peachBite.pbgact.service.PbgactVO"/>
+		<typeAlias alias="davstatusVO" type="peachBite.devstatus.service.DevstatusVO"/>
+    </typeAliases>
+</configuration>
