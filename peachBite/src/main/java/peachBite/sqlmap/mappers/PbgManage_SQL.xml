@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="peachBite.pbg.service.impl.PbgManageMapper">
+
+	<resultMap id="pbg" type="peachBite.pbg.service.PbgVO">
+		<result property="pbgid" column="pbgid"/>
+		<result property="version" column="version"/>
+		<result property="macaddr" column="macaddr"/>
+		<result property="useflag" column="useflag"/>
+		<result property="regflag" column="regflag"/>
+		<result property="createat" column="createat"/>
+	</resultMap>
+
+
+	<select id="selectPbg" resultMap="pbg">
+			SELECT
+				pbgid,
+				version,
+				macaddr,
+				useflag,
+				regflag,
+				createat,
+				cafeid
+			FROM petdb.cafepbg
+			WHERE pbgid = #{pbgid}
+			
+	</select>
+
+	<select id="selectPbgList" parameterType="peachBite.com.DefaultVO" resultMap="pbg">
+			SELECT
+				pbgid,
+				version,
+				macaddr,
+				useflag,
+				regflag,
+				createat,
+				cafeid
+			FROM petdb.cafepbg
+	</select>
+	
+	<select id="selectTotCnt" parameterType="peachBite.com.DefaultVO" resultType="java.lang.Integer">
+		SELECT
+			count(*)
+		FROM petdb.cafepbg
+	</select>
+	
+	<insert id="insertPbg"> 
+    	INSERT INTO petdb.cafepbg
+    			(pbgid,
+				version,
+				macaddr,
+				useflag,
+				regflag,
+				createat,
+				cafeid)
+				 VALUES (
+				 (SELECT MAX(pbgid) from petdb.cafepbg a) +1,				 
+				  #{version}, #{macaddr}, #{useflag}, #{regflag}, now(), #{cafeid}) 
+    </insert>
+
+	<update id="updatePbg"> 
+     UPDATE petdb.cafepbg
+     SET version = #{version},
+				macaddr = #{macaddr},
+				useflag = #{useflag},
+				regflag = #{regflag},
+				cafeid = #{cafeid}
+	WHERE pbgid = #{pbgid}
+    </update>
+
+	<delete id="deletePbg" >
+		DELETE	
+		FROM petdb.cafepbg
+	WHERE pbgid = #{pbgid}
+	</delete>
+
+</mapper>

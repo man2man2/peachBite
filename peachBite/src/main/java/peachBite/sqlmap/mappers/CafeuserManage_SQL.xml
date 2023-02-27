@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="peachBite.cafeuser.service.impl.CafeuserManageMapper">
+
+	<resultMap id="cafeuser" type="peachBite.cafeuser.service.CafeuserVO">
+		<result property="cfuserid" column="cfuserid"/>
+		<result property="username" column="username"/>
+		<result property="phonenum" column="phonenum"/>
+		<result property="email" column="email"/>
+	</resultMap>
+
+
+	<select id="selectCafeuser" resultMap="cafeuser">
+		SELECT
+			cfuserid,
+			username,
+			phonenum,
+			email 
+		FROM petdb.cafeuser a
+		WHERE cfuserid = #{cfuserid}
+		and passwd = #{passwd}
+	</select>
+
+	<insert id="insertCafeuser"> 
+		INSERT petdb.cafeuser
+		(cfuserid, username,  phonenum,email, createat)
+		VALUES(
+		(SELECT MAX(cfuserid) from petdb.cafeuser a) +1
+		, #{username}, #{phonenum}, #{email}, now())
+	</insert>
+
+	<update id="updateCafeuser"> 
+		UPDATE petdb.cafeuser
+		set 
+			username = #{username},
+			phonenum = #{phonenum},
+			email = #{email}
+		WHERE cfuserid = #{cfuserid}
+	</update>
+
+	<delete id="deleteCafeuser"> 
+		DELETE
+		FROM petdb.cafeuser
+		WHERE cfuserid = #{cfuserid}
+	</delete>
+	
+		<select id="selectCafeuserList" parameterType="peachBite.com.DefaultVO" resultMap="cafeuser">
+		SELECT
+			cfuserid,
+			username,
+			phonenum,
+			email 
+		FROM petdb.cafeuser
+	</select>
+	<select id="selectCafeuserTotCnt" parameterType="peachBite.com.DefaultVO" resultType="java.lang.Integer">
+		SELECT
+			count(*)
+		FROM petdb.cafeuser
+	</select>
+</mapper>

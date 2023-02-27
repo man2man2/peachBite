@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="peachBite.cafemain.service.impl.CafemainManageMapper">
+                   
+	<resultMap id="cafemain" type="peachBite.cafemain.service.CafemainVO">
+		<result property="cafeid" column="cafeid"/>
+		<result property="Cname" column="Cname"/>
+		<result property="passwd" column="passwd"/>
+		<result property="email" column="email"/>
+		<result property="address" column="address"/>
+		<result property="jobCategory" column="jobCategory"/>
+		<result property="position" column="position"/>
+		<result property="memo" column="memo"/>
+		<result property="phonenum" column="phonenum"/>
+	</resultMap>
+
+	<select id="selectCafemain" resultMap="cafemain">
+			SELECT
+				cafeid,
+				Cname,
+				email,
+				address,
+				jobCategory,
+				position,
+				memo,
+				phonenum
+			FROM petdb.cafemain
+			WHERE email = #{email}
+			and passwd = #{passwd}
+	</select>
+
+	<select id="selectCafemainList" parameterType="peachBite.com.DefaultVO" resultMap="cafemain">
+			SELECT
+				cafeid,
+				Cname,
+				email,
+				address,
+				jobCategory,
+				position,
+				memo,
+				phonenum	
+			FROM petdb.cafemain
+	</select>
+
+	<insert id="insertCafemain"> 
+		INSERT petdb.cafemain
+		(		cafeid,
+				Cname,
+				email,
+				address,
+				jobCategory,
+				position,
+				memo,
+				createat,
+				phonenum
+			)
+		VALUES(#{cafeid}, #{Cname}, #{email}, #{address}, #{jobCategory}, #{position}, #{memo}, now(), #{phonenum})
+	</insert>
+
+	<update id="updateCafemain"> 
+		UPDATE petdb.cafemain
+		set 
+			Cname= #{Cname},
+			email = #{email},
+			address = #{address},
+			jobCategory = #{jobCategory},
+			position = #{position}
+			memo = #{memo}
+			phonenum = #{phonenum}
+		WHERE cafeid = #{cafeid}
+	</update>
+
+	<delete id="deleteCafemain"> 
+		DELETE
+		FROM petdb.cafemain
+		WHERE cafeid = #{cafeid}
+	</delete>
+
+</mapper>

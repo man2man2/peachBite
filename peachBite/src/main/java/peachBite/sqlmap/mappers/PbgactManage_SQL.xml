@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="peachBite.pbgact.service.impl.PbgactManageMapper">
+
+	<resultMap id="pbgact" type="peachBite.pbgact.service.PbgactVO">
+		<result property="id" column="id"/>
+		<result property="pincode" column="Pincode"/>
+		<result property="userid" column="UserId"/>
+		<result property="typeG" column="type_g"/>
+		<result property="ver" column="Ver"/>
+		<result property="gId" column="G_ID"/>
+		<result property="dFrom" column="D_From"/>
+		<result property="verEx" column="Ver_ex"/>
+		<result property="dId" column="D_ID"/>
+		<result property="aTemp" column="A_Temp"/>
+		<result property="sTemp" column="S_Temp"/>
+		<result property="bLevel" column="B_Level"/>
+		<result property="vT" column="V_T"/>
+		<result property="vX" column="V_X"/>
+		<result property="vY" column="V_Y"/>
+		<result property="vZ" column="V_Z"/>
+		<result property="lati" column="Lati"/>
+		<result property="longi" column="Longi"/>
+		<result property="rssi" column="RSSI"/>
+	</resultMap>
+
+	<select id="selectPbgact" resultMap="pbgact">
+		SELECT id,
+		   PinCode,
+		   UserId,
+		   Type_g,
+		   Ver,
+		   G_ID,
+		   D_From,
+		   Ver_ex,
+		   D_ID,
+		   A_Temp,
+		   S_Temp,
+		   B_Level,
+		   V_T,
+		   V_X,
+		   V_Y,
+		   V_Z,
+		   Lati,
+		   Longi,
+		   RSSI
+	FROM   petdb.pbgact
+	WHERE id = #{id}
+	</select>
+
+	<select id="selectPbgactList" parameterType="peachBite.com.DefaultVO" resultMap="pbgact">
+		SELECT
+			id,
+		   PinCode,
+		   UserId,
+		   Type_g,
+		   Ver,
+		   G_ID,
+		   D_From,
+		   Ver_ex,
+		   D_ID,
+		   A_Temp,
+		   S_Temp,
+		   B_Level,
+		   V_T,
+		   V_X,
+		   V_Y,
+		   V_Z,
+		   Lati,
+		   Longi,
+		   RSSI
+		FROM   petdb.pbgact
+	</select>
+	
+	<insert id="insertPbgact"> 
+    	INSERT INTO petdb.pbgact
+    	(
+			id,
+		   PinCode,
+		   UserId,
+		   Type_g,
+		   Ver,
+		   G_ID,
+		   D_From,
+		   Ver_ex,
+		   D_ID,
+		   A_Temp,
+		   S_Temp,
+		   B_Level,
+		   V_T,
+		   V_X,
+		   V_Y,
+		   V_Z,
+		   Lati,
+		   Longi,
+		   RSSI,
+		   created_at
+    	) 
+    	VALUES (
+    	#{id},
+    	#{pincode},
+       #{userid},
+       #{typeG},
+       #{ver},
+       #{gId},
+       #{dFrom},
+       #{verEx},
+       #{dId},
+       #{aTemp},
+       #{sTemp},
+       #{bLevel},
+       #{vT},
+       #{vX},
+       #{vY},
+       #{vZ},
+       #{lati},
+       #{longi},
+       #{rssi},
+       now()
+    	) 
+    </insert>
+
+	<update id="updatePbgact"> 
+	UPDATE petdb.pbgact
+SET    PinCode = #{pincode},
+       UserId  = #{userid},
+       Type_g  = #{typeG},
+       Ver     = #{ver},
+       G_ID    = #{gId},
+       D_From  = #{dFrom},
+       Ver_ex  = #{verEx},
+       D_ID    = #{dId},
+       A_Temp  = #{aTemp},
+       S_Temp  = #{sTemp},
+       B_Level = #{bLevel},
+       V_T     = #{vT},
+       V_X     = #{vX},
+       V_Y     = #{vY},
+       V_Z     = #{vZ},
+       Lati    = #{lati},
+       Longi   = #{longi},
+       RSSI    = #{rssi}
+FROM   petdb.pbgact
+WHERE  id = #{id}
+    </update>
+
+	<delete id="deletePbgact" >
+	DELETE
+	FROM   petdb.pbgact
+	WHERE  id = #{id}
+	</delete>
+
+</mapper>
